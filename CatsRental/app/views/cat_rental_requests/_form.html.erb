@@ -1,0 +1,22 @@
+<!-- Create action_url based on above, set hidden method -->
+<form action="<%=cat_rental_requests_url%>" method="post">
+
+  <!-- <label for="name">Name</label>
+  <input id="name" type="text" name="cat[name]" value="<%#=@cat.name %>"> -->
+
+  <label for="cat_id">Cat</label>
+    <select name="cat_rental_requests[cat_id]" id="cat_id">
+      <option disabled "selected" >--Please Select a Cat--</option>
+      <% @cats.each do |cat| %>
+        <option value = "<%= cat.id %>" ><%= cat.name %></option>
+      <% end %>
+    </select>
+
+    <label for="start_date">Start Date</label>
+    <input id="start_date" type="date" name="cat_rental_requests[start_date]">
+
+    <label for="end_date">Start Date</label>
+    <input id="end_date" type="date" name="cat_rental_requests[end_date]">
+
+  <input type="submit" value="Book Cat">
+</form>

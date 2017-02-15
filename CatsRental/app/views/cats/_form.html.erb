@@ -1,0 +1,45 @@
+<!-- set action based on edit or create -->
+<% if action==:edit %>
+  <% action_url = cat_url(cat) %>
+<%else%>
+  <% action_url = cats_url %>
+<% end %>
+
+<!-- Create action_url based on above, set hidden method -->
+<form action="<%=action_url%>" method="post">
+  <% if action==:edit %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+
+  <label for="name">Name</label>
+  <input id="name" type="text" name="cat[name]" value="<%=@cat.name %>">
+
+  <label for="color">Color</label>
+    <select name="cat[color]" id="color">
+      <option disabled <%= cat.color ? "" : "selected" %>>--Please Select a Color--</option>
+      <option value = "black" <%= @cat.color == "black" ? "selected" : "" %>>Black</option>
+      <option value = "tabby" <%= @cat.color == "tabby" ? "selected" : "" %>>Tabby</option>
+      <option value = "orange" <%= @cat.color == "orange" ? "selected" : "" %>>Orange</option>
+      <option value = "white" <%= @cat.color == "white" ? "selected" : "" %>>White</option>
+      <option value = "grey" <%= @cat.color == "grey" ? "selected" : "" %>>Grey</option>
+      <option value = "hairless" <%= @cat.color == "hairless" ? "selected" : "" %>>Hairless</option>
+      <option value = "spotted" <%= @cat.color == "spotted" ? "selected" : "" %>>Spotted</option>
+    </select>
+
+  <label for="sex">Sex</label>
+    <select name="cat[sex]" id="sex">
+      <option disabled <%= cat.sex ? "" : "selected" %>>--Please Select a Sex--</option>
+      <option value = "M" <%= @cat.sex == "M" ? "selected" : "" %>>M</option>
+      <option value = "F" <%= @cat.sex == "F" ? "selected" : "" %>>F</option>
+    </select>
+
+  <label for="birth_date">Birth Date</label>
+  <input id="birth_date" type="date" name="cat[birth_date]" value="<%=@cat.birth_date %>">
+
+  <label for="description">Description</label>
+  <textarea name="cat[description]">
+    <%= @cat.description %>
+  </textarea>
+
+  <input type="submit" value="<%= action == :edit ? 'update cat' : 'add cat' %>">
+</form>
